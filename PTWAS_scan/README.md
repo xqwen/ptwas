@@ -39,9 +39,19 @@ ptwas_builder -f dap_output_file -d gene_sbmas_file > gene.ptwas_weights.txt
 
 ### Step 3: Convert to GAMBIT database format
 
-First, concatenate PTWAS weights generated from Step 2 into a single file, e.g., ``cat *.ptwas_weights.txt | gzip - > all_gene.ptwas_weights.gz``. Then run the R script 
+First, concatenate PTWAS weights generated from Step 2 into a single file, e.g., 
+```
+  cat *.ptwas_weights.txt | gzip - > all_gene.ptwas_weights.gz
+``` 
+Next, run the R script ``make_GAMBIT_DB.R``
 ```
   Rscript make_GAMBIT_DB.R -d all_gene.ptwas_weights.gz -o all_gene.ptwas_weights.gambit.vcf
 ```
+
+If there are eQTL data for multiple tissues, create the ``all_gene.ptwas_weights.gz`` for each tissue individually, and create a directory, e.g., ``tissue_dir``. Next, place all single-tissue weight files into the directory, and run  
+```
+ Rscript make_GAMBIT_DB.R -D all_gene.ptwas_weights.gz -o Multi_tissue_all_gene.ptwas_weights.gambit.vcf
+``` 
+This will create a multi-tissue GAMBIT DB file.
 
 
