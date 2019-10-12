@@ -29,12 +29,19 @@ dap-g -d gene_sbams_file -o dap_output_file
 
 Please refer to the [DAP repository](https://github.com/xqwen/dap/tree/master/dap_src#dap-g-c-implementation-of-adaptive-dap-algorithm) for more command line options. 
 
-### Step 2: compute PTWAS weight
+### Step 2: Compute PTWAS weight
 
 This is achieved by running [ptwas\_builder](https://github.com/xqwen/dap/tree/master/ptwas_builder) for each gene. (It is practically sufficient to run ptwas\_build only for eGenes.) The sbams file and the DAP output file are required. The command for this step is 
 
 ```
-ptwas_builder -f dap_output_file -d gene_sbmas_file > gene_ptwas.weights.txt
+ptwas_builder -f dap_output_file -d gene_sbmas_file > gene.ptwas_weights.txt
+```
+
+### Step 3: Convert to GAMBIT database format
+
+First, concatenate PTWAS weights generated from Step 2 into a single file, e.g., ``cat *.ptwas_weights.txt | gzip - > all_gene.ptwas_weights.gz``. Then run the R script 
+```
+  Rscript make_GAMBIT_DB.R -d all_gene.ptwas_weights.gz -o all_gene.ptwas_weights.gambit.vcf
 ```
 
 
