@@ -2,8 +2,8 @@
 
 The PTWAS scan procedure is implemented in [GAMBIT](https://github.com/corbinq/gambit). There are  two required input files, both of which are in compressed vcf formats:
 
-    + PTWAS SNP weight file: containing eQTL weights constructed by the PTWAS algorithm
-    + GWAS summary-level stats file: containing single-SNP association  statistics from a GWAS
++ PTWAS SNP weight file: containing eQTL weights constructed by the PTWAS algorithm
++ GWAS summary-level stats file: containing single-SNP association  statistics from a GWAS
 Additionally, an LD reference panel is also required. 
 
 The command for the scan analysis is
