@@ -1,9 +1,9 @@
 #! /usr/bin/perl
 
 $cpip_thresh = 0.5;
-
-
 $infile = "";
+$grp_count = 0;
+$print_grp = 0;
 
 for $i (0..$#ARGV){
 
@@ -19,6 +19,11 @@ for $i (0..$#ARGV){
 
     if($ARGV[$i] eq "-n"){
         $name = $ARGV[++$i];
+        next;
+    }
+
+    if($ARGV[$i] eq "--group" || $ARGV[$i] eq "--cluster_info"){
+        $print_grp = 1;
         next;
     }
 
@@ -62,7 +67,7 @@ while(<FILE>){
 
 
 foreach $k (sort {$a<=>$b} keys %cluster){
-
+    $grp_count++; 
     my @pip = @{$cluster{$k}->{pip}};
 
     my $m = scalar(@pip);
@@ -86,7 +91,6 @@ foreach $k (sort {$a<=>$b} keys %cluster){
     }
 
 
-    print "$grp_beta $grp_se\n";
     my $grp_beta = 0;
     my $grp_se = 0;
     for $i (0..$#pip){
@@ -95,7 +99,10 @@ foreach $k (sort {$a<=>$b} keys %cluster){
     }
 
     $grp_se = sqrt(($grp_se - $grp_beta**2));
-
+    if($print_grp){
+        printf "\t[%d]\t%7.3f\t\t%d\t\t%7.3f\t%7.3f\n",$grp_count, $spip,scalar(@pip), $grp_beta, $grp_se;
+    }
+    
     push @wv, 1/($grp_se**2);
 
     push @est, $grp_beta;
@@ -103,7 +110,9 @@ foreach $k (sort {$a<=>$b} keys %cluster){
 }
 
 
-
+if($print_grp){
+    printf "\n\n";
+}
 
 
 my $meta = 0;
