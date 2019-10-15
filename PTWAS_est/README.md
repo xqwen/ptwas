@@ -21,7 +21,7 @@ A sample input file from real data, ``sample.ptwas_est.input.txt`` is provided. 
 
 The information for column 1 to 5 can be extracted from the DAP fine-mapping file by
 ```
-grep "((" DAP_output_file  | awk '{ if ($5 != -1) print $2,$5,$3,$6,$7}'  | sort -nk2    | more
+grep "((" DAP_output_file  | awk '{ if ($5 != -1) print $2,$5,$3,$6,$7}'  | sort -nk2   
 ```
 
 
