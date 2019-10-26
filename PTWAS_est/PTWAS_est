@@ -34,6 +34,9 @@ if (! -r $infile){
     exit(1);
 }
 
+if($print_grp){
+    printf "#cluster_id\tSPIP\tmember_snp\tcluster_estimate\tstd_err\n";
+}
 
 open FILE, "$infile";
 while(<FILE>){
@@ -100,7 +103,7 @@ foreach $k (sort {$a<=>$b} keys %cluster){
 
     $grp_se = sqrt(($grp_se - $grp_beta**2));
     if($print_grp){
-        printf "\t[%d]\t%7.3f\t\t%d\t\t%7.3f\t%7.3f\n",$grp_count, $spip,scalar(@pip), $grp_beta, $grp_se;
+        printf "%d\t%7.3f\t\t%d\t\t%7.3f\t%7.3f\n",$grp_count, $spip,scalar(@pip), $grp_beta, $grp_se;
     }
     
     push @wv, 1/($grp_se**2);
@@ -136,6 +139,9 @@ $I2 = 0;
 $I2 = ($Q-$#est)/$Q if $Q > 1e-3;
 $I2 =0 if $I2 <0;
 
+
+$name = "NA" if !defined($name);
+printf  "#Gene\tnum_cluster\tcum_pip\tnum_instruments\testimated_eff\tstd_err\tI^2\n";
 printf  "$name\t%d\t%7.3f\t%d\t%7.3f\t%7.3f\t%7.3f\n", scalar(keys %cluster), $tpip, $#est + 1, $meta, $se_meta, $I2;
 
 

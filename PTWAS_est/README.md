@@ -33,4 +33,24 @@ grep "((" DAP_output_file  | awk '{ if ($5 != -1) print $2,$5,$3,$6,$7}'  | sort
 + ``-n gene-name``: specify the gene (or gene-trait pair) name for output
 + ``--cluster_info``: show estimate details for each signal cluster (By default, it is not shown)
 
+## Output 
+
+The output from from the ``PTWAS_est`` has the following format
+
++ column 1: Gene name
++ column 2: Number of eQTL signal clusters
++ column 3: Posterior expected number of eQTLs/cumulative eQTL PIPs
++ column 4: Number of eligible instruments (signal clusters exceeding SPIP threshold)
++ column 5: Estimated gene-to-trait effect size
++ column 6: Standard error of the estimated effect
++ column 7: I^2 statistic to assess the heterogeneity of estimated effects across eligible signal clusters
+
+
+if ``--cluster_info`` is specified, additional information on cluster-specific estimates will be output with the following format
+
++ column 1: cluster id
++ column 2: cluster SPIP
++ column 3: number of member SNPs in cluster
++ column 4: cluster-specific gene-to-trait effect estimate
++ column 5: standard error of the estimate
 
