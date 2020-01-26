@@ -20,7 +20,7 @@ r option) any later version. See [LICENSE](http://www.gnu.org/licenses/gpl-3.0.e
 
 * ``PTWAS_est``: code and tutorial to run model diagnosis and effect size estimation procedures
 
-* ``PTWAS_paper``: code and downloadable data sources for simulations and real data analysis used in the [PTWAS paper]((https://www.biorxiv.org/content/10.1101/808295v1)
+* ``PTWAS_paper``: code and downloadable data sources for simulations and real data analysis used in the [PTWAS paper](https://www.biorxiv.org/content/10.1101/808295v1)
 
 
 ## Required software
