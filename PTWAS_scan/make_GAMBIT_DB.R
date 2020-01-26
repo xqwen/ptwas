@@ -44,6 +44,8 @@ for  (i in 1:length(args)){
 
 }
 
+OUT_FILE_US = paste0(OUT_FILE,".us")
+
 get_tissue<-function(in_file){
     return(fread( cmd = paste0("zcat ", in_file, " | head -1 | awk '{print $1 }' "), header=FALSE)$V1)
 }
@@ -117,16 +119,20 @@ setcolorder(dd, c('chr','pos','id','ref','alt','beta'))
 
 # header linking tissue names to integer keys
 header_idx <- paste0('## SUBCLASS_IDS=', paste(sort(unique(d$tissue_f)), tissues, sep = ':', collapse = ','))
-
+header_vcf <- c("#chr\tpos\tid\tref\talt\tbeta")
 # write header to output file
-writeLines(text = header_idx, OUT_FILE)
-
+writeLines(text = header_idx, OUT_FILE_US)
+writeLines(text = c(header_idx, header_vcf), OUT_FILE)
 # add hash before column IDs
 setnames(dd, 'chr', '#chr')
 
 # write output to file
 cat('Writing output ... \n')
-fwrite(dd, OUT_FILE, append = TRUE, sep = '\t', quote = FALSE, col.names = TRUE, row.names = FALSE)
+
+fwrite(dd, OUT_FILE_US, append = TRUE, sep = '\t', quote = FALSE, col.names = FALSE, row.names = FALSE)
+
+system(paste("sort -V -k1,1 -k2,2n ", OUT_FILE_US, " >> ",OUT_FILE))
+system(paste("rm ", OUT_FILE_US))
 
 # bgzip output file
 if( BGZIP ){
