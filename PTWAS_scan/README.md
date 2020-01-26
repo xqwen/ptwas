@@ -25,10 +25,17 @@ Please refer to the [DAP repository](https://github.com/xqwen/dap/tree/master/da
 This is achieved by running [ptwas\_builder](https://github.com/xqwen/dap/tree/master/ptwas_builder) for each gene. (It is practically sufficient to run ptwas\_build only for eGenes.) The sbams file and the DAP output file are required. The command for this step is 
 
 ```
-ptwas_builder -f dap_output_file -d gene_sbmas_file [-t min_weight_thresh] > gene_name.ptwas_weights.txt
+ptwas_builder -f dap_output_file -d gene_sbmas_file -g gene_name [-t tissue_name ] [-wt min_abs_weight_thresh] [-o gene_name.ptwas_weights.txt]
 ```
 
-Note that ``-t min_weight_thresh`` is optional, it defines the minimum absolute value of weight to be output by the program.  
+The command line options are 
+
++ ``-f dap_output_file``: give the fine-mapping output for the target gene
++ ``-d gene_sbmas_file``: the same input sbmas file for DAP analysis
++ ``-g gene_name``: give the name of the target gene
++ ``-t tissue_name``: (optional) give the tissue name. Required for building multi-tissue weights
++ ``-wt min_abs_weight_thresh``: (optional) defines the minimum absolute value of weight to be output
++ ``-o output_file_name``: (optional) output file name
 
 
 ### Step 3: Convert to GAMBIT database format
