@@ -7,7 +7,7 @@ Here we provide details on constructing PTWAS weights from users' own eQTL datas
 
 ## 1. PTWAS eQTL weight construction
 
-Note that we have pre-computed PTWAS weights from the GTEx (v8) data for 49 tissues, the relevant files can be downloaded [here](https://tinyurl.com/yxe9k6v). In case that you want to build the weights from your own eQTL data, follow along the following steps.
+Note that we have pre-computed PTWAS weights from the GTEx (v8) data for 49 tissues, the relevant files can be downloaded [here](https://tinyurl.com/yxe9k6vl). In case that you want to build the weights from your own eQTL data, follow along the following steps.
 
 **Important Note**: the DB making script assumes genomic position information is coded in the SNP IDs. A SNP ID should start with chromosome number and followed by ``_`` and the position.  Other information can follow afterwards e.g., ``chr1_44503918_C_T_b38`` is a valid SNP ID. If such naming convention is not followed, the DB building script ``make_GAMBIT_DB.R`` will report errors.  
 
@@ -53,7 +53,7 @@ Next, run the R script ``make_GAMBIT_DB.R``
   Rscript make_GAMBIT_DB.R -d all_gene.ptwas_weights.gz -o all_gene.ptwas_weights.gambit.vcf
 ```
 
-If there are eQTL data for multiple tissues, create the ``all_gene.ptwas_weights.gz`` file for each tissue individually, and create a directory, e.g., ``tissue_dir``. Next, place all single-tissue weight files into the directory, and run  
+If there are eQTL data for multiple tissues, create the ``all_gene.ptwas_weights.gz`` and the corresponding index files for each tissue individually, and create a directory, e.g., ``tissue_dir``. Next, place all single-tissue weight files into the directory, and run  
 ```
  Rscript make_GAMBIT_DB.R -D tissue_dir  -o Multi_tissue_all_gene.ptwas_weights.gambit.vcf
 ``` 
@@ -62,7 +62,7 @@ This will create a multi-tissue GAMBIT DB file.
 
 ## 2. Format GWAS summary statistics
 
-The required GWAS summary statistics are single-SNP z-scores. The input file must be ordered by chromosome and genomic position, with input fields as shown below:
+The required GWAS summary statistics are single-SNP z-scores. The input file for GWAS should be a bgzipped vcf file. It must be ordered by chromosome and genomic position, with input fields as shown below:
 
 ```
 #CHR  POS     REF  ALT  SNP_ID      N         ZSCORE   ANNO
@@ -74,6 +74,12 @@ The required GWAS summary statistics are single-SNP z-scores. The input file mus
 
 Note that the first four fields and `ZSCORE` are required, while `SNP_ID`, `ANNO` and `N` (effective sample size) are optional. As a result,`SNP_ID` does not need to follow the genomic position convention. 
 
+An index file is also required, if it is not already generated. Use 
+```
+  tabix -p vcf gwas_file.vcf.gz
+```  
+to generate the index file. 
+
 
 ## 3. Run PTWAS scan
 
@@ -81,13 +87,19 @@ The PTWAS scan procedure is implemented in [GAMBIT](https://github.com/corbinq/g
 
 + PTWAS SNP weight file: containing eQTL weights constructed by the PTWAS algorithm
 + GWAS summary-level stats file: containing single-SNP association  statistics from a GWAS
-Additionally, an LD reference panel is also required. 
++ LD panels for the studied population
+
+Due to NIH policy, we can't re-distribute the LD panels that we used for the GTEx data, because the panels contain individual-level genotype data. As an alternative, we provide an LD panel built from 1000 Genome project, phase 3 version 5, which can be downloaded [here](https://tinyurl.com/yxe9k6vl) and is suitable to study European population. Run `tar zxf 1KG_phase3_v5_panel.gambit.tgz` to unpack the LD panel. 
+
 
 The command for the scan analysis is
 
 ```
-GAMBIT --gwas gwas_file --betas ptwas_weight --ldref LD_panel_files --ldref-only 
+GAMBIT --gwas gwas_file --betas ptwas_weight --ldref "LD_panel/chr*.vcf.gz" --ldref-only 
 ```
+
+
+
 
 For more details on running GAMBIT, please refer to the [GAMBIT repository](https://github.com/corbinq/gambit), or contact Corbin Quick (corbinq@gmail.com).
 
