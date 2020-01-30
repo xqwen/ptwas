@@ -9,6 +9,9 @@ Here we provide details on constructing PTWAS weights from users' own eQTL datas
 
 Note that we have pre-computed PTWAS weights from the GTEx (v8) data for 49 tissues, the relevant files can be downloaded [here](https://tinyurl.com/yxe9k6v). In case that you want to build the weights from your own eQTL data, follow along the following steps.
 
+**Important Note**: the DB making script assumes genomic position information is coded in the SNP IDs. A SNP ID should start with chromosome number and followed by ``_`` and the position.  Other information can follow afterwards e.g., ``chr1_44503918_C_T_b38`` is a valid SNP ID. If such naming convention is not followed, the DB building script ``make_GAMBIT_DB.R`` will report errors.  
+
+
 
 ### Step 1: Fine-mapping eQTL by [DAP](https://github.com/xqwen/dap/)
 
