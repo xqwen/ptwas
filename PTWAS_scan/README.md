@@ -80,6 +80,7 @@ An index file is also required, if it is not already generated. Use
 ```  
 to generate the index file. 
 
+An example GWAS summary file from the GIANT consortium height study is provided in [here](https://tinyurl.com/tqyhnom).
 
 ## 3. Run PTWAS scan
 
@@ -97,9 +98,6 @@ The command for the scan analysis is
 ```
 GAMBIT --gwas gwas_file --betas ptwas_weight --ldref "LD_panel/chr*.vcf.gz" --ldref-only 
 ```
-
-
-
 
 For more details on running GAMBIT, please refer to the [GAMBIT repository](https://github.com/corbinq/gambit), or contact Corbin Quick (corbinq@gmail.com).
 
