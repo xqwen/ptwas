@@ -47,6 +47,7 @@ First, concatenate PTWAS weights generated from Step 2 into a single file, e.g.,
 ```
   cat *.ptwas_weights.txt | gzip - > all_gene.ptwas_weights.gz
 ``` 
+
 Next, run the R script ``make_GAMBIT_DB.R``
 ```
   Rscript make_GAMBIT_DB.R -d all_gene.ptwas_weights.gz -o all_gene.ptwas_weights.gambit.vcf
@@ -59,9 +60,22 @@ If there are eQTL data for multiple tissues, create the ``all_gene.ptwas_weights
 This will create a multi-tissue GAMBIT DB file.
 
 
+## 2. Format GWAS summary statistics
+
+The required GWAS summary statistics are single-SNP z-scores. The input file must be ordered by chromosome and genomic position, with input fields as shown below:
+
+```
+#CHR  POS     REF  ALT  SNP_ID      N         ZSCORE   ANNO
+1     721290  C    G    rs12565286  58663.62  0.86661  Intergenic
+1     752566  G    A    rs3094315   57135     0.5521   Intergenic
+1     775659  A    G    rs2905035   54570     1.12098  Intron:LOC643837
+1     777122  A    T    rs2980319   54570     1.11906  Exon:LOC643837
+```
+
+Note that the first four fields and `ZSCORE` are required, while `SNP_ID`, `ANNO` and `N` (effective sample size) are optional. As a result,`SNP_ID` does not need to follow the genomic position convention. 
 
 
-## 2. Run PTWAS scan
+## 3. Run PTWAS scan
 
 The PTWAS scan procedure is implemented in [GAMBIT](https://github.com/corbinq/gambit). There are  two required input files, both of which are in compressed vcf formats:
 
