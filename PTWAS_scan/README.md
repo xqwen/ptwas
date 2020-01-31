@@ -88,7 +88,7 @@ The PTWAS scan procedure is implemented in [GAMBIT](https://github.com/corbinq/g
 
 + PTWAS SNP weight file: containing eQTL weights constructed by the PTWAS algorithm
 + GWAS summary-level stats file: containing single-SNP association  statistics from a GWAS
-+ LD panels for the studied population
++ LD panels for the studied population: these files are zipped vcf files recording haplotypes and organized by chromosomes.
 
 Due to NIH policy, we can't re-distribute the LD panels that we used for the GTEx data, because the panels contain individual-level genotype data. As an alternative, we provide an LD panel built from 1000 Genome project, phase 3 version 5, which can be downloaded [here](https://tinyurl.com/yxe9k6vl) and is suitable to study European population. Run `tar zxf 1KG_phase3_v5_panel.gambit.tgz` to unpack the LD panel. 
 
@@ -96,8 +96,21 @@ Due to NIH policy, we can't re-distribute the LD panels that we used for the GTE
 The command for the scan analysis is
 
 ```
-GAMBIT --gwas gwas_file --betas ptwas_weight --ldref "LD_panel/chr*.vcf.gz" --ldref-only 
+GAMBIT --gwas gwas_file --betas ptwas_weight_file --ldref LD_panel_files --ldref-only 
 ```
+
+The following command will run multi-tissue PTWAS scan for the GIANT height data with the provided annotation file and the 1KG European LD panel files:
+```
+GAMBIT --gwas GIANT_Height.gambit.vcf.gz --betas PTWAS_scan.weights.hg38.txt.gz --ldref "G1K_EUR_3V5/chr*.vcf.gz" --ldre-only
+```
+
+Users can specify using only a subset of tissues for analysis with the ``--tissues`` option, e.g.,
+```
+GAMBIT --gwas GIANT_Height.gambit.vcf.gz --betas PTWAS_scan.weights.hg38.txt.gz --ldref "G1K_EUR_3V5/chr*.vcf.gz" --ldre-only --tissues Whole_Blood,Muscle_Skeletal 
+```
+This will only analyze TWAS analysis using eQTL weights from Whole_Blood and Muscle_Skeletal. 
+
+
 
 For more details on running GAMBIT, please refer to the [GAMBIT repository](https://github.com/corbinq/gambit), or contact Corbin Quick (corbinq@gmail.com).
 
