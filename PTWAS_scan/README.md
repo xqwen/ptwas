@@ -111,9 +111,10 @@ GAMBIT --gwas GIANT_Height.gambit.vcf.gz --betas PTWAS_scan.weights.hg38.txt.gz 
 This will only analyze TWAS analysis using eQTL weights from Whole_Blood and Muscle_Skeletal. 
 
 
+The p-values for each gene-tissue pair are reported in *.stratified_out.txt files, and the omnibus p-values (aggregating across all tissues for each eGene) in *.summary_out.txt files.
+
 
 For more details on running GAMBIT, please refer to the [GAMBIT repository](https://github.com/corbinq/gambit), or contact Corbin Quick (corbinq@gmail.com).
-
 
 
 
