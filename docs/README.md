@@ -4,7 +4,7 @@
 
 The bare minimum set of software packages for running PTWAS scan, validation, and estimation procedures are
 + **GAMBIT**: software package implementing generalized burden test using GWAS summary statistics [\[download\]](https://github.com/corbinq/GAMBIT)
-+ **PTWAS_est**: perl script for causal assumption validation and effect estimation [\[download\]](https://https://github.com/xqwen/ptwas/tree/master/PTWAS_est/)
++ **PTWAS_est**: perl script for causal assumption validation and effect estimation [\[download\]](https://github.com/xqwen/ptwas/tree/master/PTWAS_est/)
 + **tabix**: [\[download\]](https://github.com/samtools/tabix)
 
 To compute PTWAS composite instrumental variables/eQTL weights for scan analysis from users' own eQTL data, it requires additional software packages/libraries
