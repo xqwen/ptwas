@@ -1,7 +1,6 @@
 ## Empirical comparison of TWAS analysis
 
-The data used in this analysis can be downloaded [here](https://tin
-yurl.com/tqyhnom). The GWAS data is the height data from the GIANT consortium. We constructed GAMBIT weights from PTWAS, TWAS-Fusion (BSLMM), PrediXcan (Elastic-Net), and SMR using the GTEx whole blood eQTL data (v8).
+The data used in this analysis can be downloaded [here](https://tinyurl.com/tqyhnom). The GWAS data is the height data from the GIANT consortium. We constructed GAMBIT weights from PTWAS, TWAS-Fusion (BSLMM), PrediXcan (Elastic-Net), and SMR using the GTEx whole blood eQTL data (v8).
 
 The commands used for various methods are 
 
