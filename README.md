@@ -14,6 +14,10 @@ Software distributed under the terms of the GNU General Public License as publis
 r option) any later version. See [LICENSE](http://www.gnu.org/licenses/gpl-3.0.en.html) for more details.
 
 
+## Quick Start
+
+[Quick start instructions for running PTWAS](https://xqwen.github.com/ptwas/)
+
 ## Repository directories
 
 * ``PTWAS_scan``: code and tutorial to run PTWAS scan procedure
