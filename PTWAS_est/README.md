@@ -6,6 +6,17 @@ The procedures for PTWAS estimation and model validation are implemented in ``pt
     ptwas_est -d gene_info.txt [-t spip_thresh] [-n gene_name]  [--cluster_info]
 ```
 
+## Command line options
+
+
++ ``-d file_name``: specify the input data file
++ ``-t spip_thresh``: specify the signal-level PIP (SPIP) to admit a strong instrument for analysis. By default, the threshold is set to 0.50. 
++ ``-n gene-name``: specify the gene (or gene-trait pair) name for output
++ ``--cluster_info``: show estimate details for each signal cluster (By default, it is not shown)
+
+
+
+
 
 ## Input file format
 
@@ -24,14 +35,6 @@ The information for column 1 to 5 can be extracted from the DAP fine-mapping fil
 grep "((" DAP_output_file  | awk '{ if ($5 != -1) print $2,$5,$3,$6,$7}'  | sort -nk2   
 ```
 
-
-## Command line options
-
-
-+ ``-d file_name``: specify the input data file
-+ ``-t spip_thresh``: specify the signal-level PIP (SPIP) to admit a strong instrument for analysis. By default, the threshold is set to 0.50. 
-+ ``-n gene-name``: specify the gene (or gene-trait pair) name for output
-+ ``--cluster_info``: show estimate details for each signal cluster (By default, it is not shown)
 
 ## Output 
 
