@@ -50,5 +50,5 @@ r option) any later version. See [LICENSE](http://www.gnu.org/licenses/gpl-3.0.e
 
 ## Citation
 
-* Chen, Y., Quick, C., Yu, K., Barbeira, A., Luca, F., Pique-Regi, R., Im, H.K., Wen, X. and GTEx Consortium, 2019. Investigating tissue-relevant causal molecular mechanisms of complex traits using probabilistic TWAS analysis. bioRxiv:808295.
+* Chen, Y., Quick, C., Yu, K., Barbeira, A.,The GTEx Consortium, Luca, F., Pique-Regi, R., Im, H.K., Wen, X.  [Investigating tissue-relevant causal molecular mechanisms of complex traits using probabilistic TWAS analysis](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02026-y). 2020. Genome Biology (21): 232.
 
