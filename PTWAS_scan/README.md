@@ -4,12 +4,13 @@
 
 Here we provide details on constructing PTWAS weights from users' own eQTL dataset and running the PTWAS scan procedure.
 
+Note that we highly recommend to use individual-level GWAS data for TWAS analysis if possible. In practice, individual-level GWAS data are often unavailable, and the scan procedure becomes an numerical approximation. In such scenario, we recommend to impute the GWAS summary statistics (in forms of z-statistics) to match the eQTL SNPs.
 
 ## 1. PTWAS eQTL weight construction
 
 Note that we have pre-computed PTWAS weights from the GTEx (v8) data for 49 tissues, the relevant files can be downloaded [here](https://tinyurl.com/yxe9k6vl). In case that you want to build the weights from your own eQTL data, follow along the following steps.
 
-**Important Note**: the DB making script assumes genomic position information is coded in the SNP IDs. A SNP ID should start with chromosome number and followed by ``_`` and the position.  Other information can follow afterwards e.g., ``chr1_44503918_C_T_b38`` is a valid SNP ID. If such naming convention is not followed, the DB building script ``make_GAMBIT_DB.R`` will report errors.  
+**Important Note**: the DB making script assumes genomic position information is coded in the SNP IDs. A SNP ID should start with chromosome number and followed by ``_`` and the position.  Other information can follow afterwards e.g., ``chr1_44503918_C_T_b38`` is a valid SNP ID. If such naming convention is not followed, the DB building script ``make_GAMBIT_DB.R`` will report errors. The position information is used to match SNPs between GWAS and eQTL datasets, please make sure this information is based on the same genomic build and accurate.   
 
 
 
